@@ -15,9 +15,9 @@ output (optional): The name of the output file. By default, the output is writte
 
 Here's an example of how to run the script:
 
-```
-python github_follower_checker.py --username USERNAME --token YOUR_TOKEN --output FILENAME
-```
+`code()`
+  Bash : 'python github_follower_checker.py --username USERNAME --token YOUR_TOKEN --output FILENAME'
+
 
 # Contributing
 Contributions are always welcome! If you find a bug or want to add a new feature, feel free to submit a pull request. To get started, fork this repository and create a new branch for your changes. Make your changes and submit a pull request with a brief description of your changes.
