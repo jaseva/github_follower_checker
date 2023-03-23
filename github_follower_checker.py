@@ -1,7 +1,6 @@
 ## Github-Follower-Checker
 ## MIT License
 ## Created Date: 2023-03-23
-## Created By: Jason Evans
 ## Version 1.0
 
 import requests
