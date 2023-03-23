@@ -1,4 +1,4 @@
-# github_follower_unchecker
+# Github Follower Unchecker
 This app tracks your Github profile for who follows you, who follows you back, and who unfollows you.
 
 This is a Python script that allows you to check your Github followers, track who has unfollowed you, and who has followed you back. The script uses the Github API and the requests library to fetch the list of followers for a given user and compare it to the list of followers from the previous check. It then outputs the changes in the follower count and status.
