@@ -5,13 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/curl/include",
-                "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/json/single_include",
-                "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/curl/include",
                 "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/json/single_include"
-                // "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/curl/include",
-                // "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/json/single_include"
             ],
-            
             "defines": [
                 "_DEBUG",
                 "UNICODE",
@@ -21,7 +16,8 @@
             "compilerPath": "cl.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
+            "intelliSenseMode": "windows-msvc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4
