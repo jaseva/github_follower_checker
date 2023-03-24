@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/curl/include",
+                "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/json/single_include",
+                "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/curl/include",
+                "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/json/single_include"
+                // "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/curl/include",
+                // "D:/jason/Documents/Source/GitHubFollowerChecker/github_follower_checker/json/single_include"
+            ],
+            
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
