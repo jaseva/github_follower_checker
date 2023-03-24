@@ -13,8 +13,9 @@
 #include <string>
 #include <sstream>
 
+//TODO: install curl & nlohmann-json packages
 #include "curl/curl.h"
-#include "nlohmann/json.hpp"
+#include "nlohmann-json.hpp"
 
 using json = nlohmann::json;
 
