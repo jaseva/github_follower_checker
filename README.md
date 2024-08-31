@@ -40,6 +40,10 @@ To use the GitHub Follower Tracker, run the `github_follower_tracker.py` script 
 python github_follower_tracker.py
 ```
 
+<img width="447" alt="image" src="https://github.com/user-attachments/assets/eefc301f-d061-49a9-8a34-224629a69597">
+
+<img width="745" alt="image" src="https://github.com/user-attachments/assets/b58d8488-995b-441c-9a11-3d8127d1078c">
+
 ### User Interface
 
 - **GitHub Username**: Enter the GitHub username you want to track.
