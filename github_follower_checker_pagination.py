@@ -1,3 +1,8 @@
+## github-follower-checker-pagination
+## MIT License
+## Created Date: 2024-08-31
+## Version 1.0
+
 import requests
 import time
 

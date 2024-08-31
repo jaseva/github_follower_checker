@@ -1,4 +1,4 @@
-## Github-Follower-Checker
+## github-follower-checker
 ## MIT License
 ## Created Date: 2023-03-23
 ## Version 1.0
