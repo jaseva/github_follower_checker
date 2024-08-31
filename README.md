@@ -44,7 +44,8 @@ python github_follower_tracker.py
 
 <img width="745" alt="image" src="https://github.com/user-attachments/assets/b58d8488-995b-441c-9a11-3d8127d1078c">
 </div>
-### User Interface
+
+## User Interface
 
 - **GitHub Username**: Enter the GitHub username you want to track.
 - **Personal Access Token**: Enter your GitHub personal access token.
