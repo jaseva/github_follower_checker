@@ -10,13 +10,13 @@ To get started, you'll need to have Python 3 installed on your machine, along wi
 
 ## Usage
 
-To use the GitHub Follower Tracker, clone this repository to your local machine and run the `github_follower_tracker.py` script.
+To use the GitHub Follower Tracker, clone this repository to your local machine and run the `github_follower_tracker_UserInputForm.py` script.
 
 Here's how to use the application:
 
 1. Run the script in the terminal or your preferred Python environment:
    ```bash
-   python github_follower_tracker.py
+   python github_follower_tracker_UserInputFornm.py
 
 2. A graphical user interface (GUI) will appear.
 
