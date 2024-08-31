@@ -1,40 +1,96 @@
 # GitHub Follower Tracker
 
-This app tracks your GitHub profile for followers, who follows you back, and who unfollows you. It also provides a user-friendly graphical interface for easy use.
-
-This Python application allows you to monitor your GitHub followers, track who has unfollowed you, and who has followed you back. The application uses the GitHub API and the `requests` library to fetch the list of followers for a given user and compare it to the list of followers from previous checks. It then outputs the changes in follower count and status through a GUI.
+This app tracks your GitHub profile for who follows you, who follows you back, and who unfollows you. It now includes advanced analytics to visualize follower growth trends, track engagement metrics, and segment followers.
 
 ## Getting Started
 
-To get started, you'll need to have Python 3 installed on your machine, along with the `requests` and `tkinter` libraries. You'll also need a personal access token from GitHub to authenticate your requests to the API. The application provides an input form to enter your GitHub username, personal access token, and specify the file name for storing follower data.
+### Prerequisites
 
-## Usage
+To get started, you'll need:
 
-To use the GitHub Follower Tracker, clone this repository to your local machine and run the `github_follower_tracker_UserInputForm.py` script.
+- **Python 3** installed on your machine.
+- The following Python libraries:
+  - `requests`
+  - `tkinter`
+  - `matplotlib`
+- A **personal access token** from GitHub to authenticate your requests to the API.
 
-Here's how to use the application:
+### Installation
 
-1. Run the script in the terminal or your preferred Python environment:
-   ```bash
-   python github_follower_tracker_UserInputFornm.py
+1. **Clone the Repository**:
+    ```sh
+    git clone https://github.com/yourusername/github-follower-tracker.git
+    cd github-follower-tracker
+    ```
 
-2. A graphical user interface (GUI) will appear.
+2. **Install Dependencies**:
+    Install the required libraries using pip:
+    ```sh
+    pip install -r requirements.txt
+    ```
 
-3. Enter your GitHub username, personal access token, and the file name where you want to save the follower data.
+3. **Set Up Your GitHub Token**:
+   - Generate a personal access token from GitHub by following [these instructions](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
 
-4. Click the "Start Tracking" button to begin monitoring your followers. The application will display new followers, unfollowers, and followers who have followed you back in the GUI window.
+### Usage
 
-## Example
-Below is an example of the application's GUI in action:
+To use the GitHub Follower Tracker, run the `github_follower_tracker.py` script in the terminal or a Python IDE.
 
-<img width="444" alt="image" src="https://github.com/user-attachments/assets/e9c5f7f0-8d9e-4acf-a673-d6335b8ad3f0">
+```sh
+python github_follower_tracker.py
+```
 
-## Contributing
-Contributions are always welcome! If you find a bug or want to add a new feature, feel free to submit a pull request. To get started, fork this repository and create a new branch for your changes. Make your changes and submit a pull request with a brief description of your modifications.
+### User Interface
 
-## License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+- **GitHub Username**: Enter the GitHub username you want to track.
+- **Personal Access Token**: Enter your GitHub personal access token.
+- **Followers File Name**: Specify the name of the file where follower data will be stored (e.g., `followers.json`).
+- **Start Tracking**: Click this button to begin tracking your followers.
+- **Show Analytics**: After tracking, use this button to visualize follower growth trends.
+- **Segment Followers**: This feature allows you to group your followers based on various criteria like activity or date followed.
 
-## Acknowledgments
-Thanks to the GitHub API team for providing an easy-to-use API for fetching user data.
-Thanks to the requests and tkinter teams for creating great Python libraries for making HTTP requests and building GUIs, respectively.
+### Advanced Analytics
+
+The GitHub Follower Tracker now includes advanced analytics features:
+
+- **Follower Growth Trends**: Visualize your follower growth over time with charts and graphs.
+- **Engagement Metrics**: Although this feature is currently a placeholder, it will eventually track your interaction history with followers (e.g., comments, likes).
+- **Follower Segmentation**: Group followers based on criteria like activity level, date followed, or contribution to repositories.
+
+### Example
+
+1. **Start Tracking**:
+    ```sh
+    python github_follower_tracker.py
+    ```
+
+2. **View Follower Growth**:
+    - After running the script and tracking followers, click on the "Show Analytics" button to visualize your follower growth over time.
+
+3. **Segment Followers**:
+    - Choose a segmentation type from the dropdown and click "Segment Followers" to group followers accordingly.
+
+### Project Structure
+
+- `github_follower_tracker.py`: The main script to run the application.
+- `analytics.py`: Handles the advanced analytics, such as plotting follower growth and segmenting followers.
+- `utils.py`: Contains utility functions for fetching and formatting follower data.
+- `requirements.txt`: Lists the dependencies required to run the application.
+- `README.md`: Documentation for the project.
+
+### Contributing
+
+Contributions are always welcome! If you find a bug or want to add a new feature, feel free to submit a pull request. To get started:
+
+1. Fork this repository.
+2. Create a new branch for your changes.
+3. Make your changes and submit a pull request with a brief description.
+
+### License
+
+This project is licensed under the MIT License - see the `LICENSE.md` file for details.
+
+### Acknowledgments
+
+- Thanks to the GitHub API team for providing an easy-to-use API for fetching user data.
+- Thanks to the developers of the `requests` and `matplotlib` libraries for making HTTP requests and data visualization in Python straightforward.
