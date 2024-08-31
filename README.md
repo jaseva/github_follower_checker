@@ -1,32 +1,40 @@
-# Github Follower Unchecker
-This app tracks your Github profile for who follows you, who follows you back, and who unfollows you.
+# GitHub Follower Tracker
 
-This is a Python script that allows you to check your Github followers, track who has unfollowed you, and who has followed you back. The script uses the Github API and the requests library to fetch the list of followers for a given user and compare it to the list of followers from the previous check. It then outputs the changes in the follower count and status.
+This app tracks your GitHub profile for followers, who follows you back, and who unfollows you. It also provides a user-friendly graphical interface for easy use.
 
-# Getting Started
-To get started, you'll need to have Python 3 installed on your machine, along with the requests library. You'll also need a personal access token from Github to authenticate your requests to the API. Follow the instructions in the script to obtain a personal access token.
+This Python application allows you to monitor your GitHub followers, track who has unfollowed you, and who has followed you back. The application uses the GitHub API and the `requests` library to fetch the list of followers for a given user and compare it to the list of followers from previous checks. It then outputs the changes in follower count and status through a GUI.
 
-# Usage
-To use the Github follower checker, clone this repository to your local machine and run the github_follower_checker_UserInputForm.py script in the terminal. 
+## Getting Started
 
-The script takes the following arguments:
+To get started, you'll need to have Python 3 installed on your machine, along with the `requests` and `tkinter` libraries. You'll also need a personal access token from GitHub to authenticate your requests to the API. The application provides an input form to enter your GitHub username, personal access token, and specify the file name for storing follower data.
 
-username (required): The Github username to check for followers.
-<br>token (required): Your personal access token from Github.
-<br>output (optional): The name of the output file. By default, the output is written to a file named follower_changes.txt.
+## Usage
 
-Here's an example of how to run the script:
+To use the GitHub Follower Tracker, clone this repository to your local machine and run the `github_follower_tracker.py` script.
 
-`python github_follower_checker_UserInputForm.py`
+Here's how to use the application:
+
+1. Run the script in the terminal or your preferred Python environment:
+   ```bash
+   python github_follower_tracker.py
+
+2. A graphical user interface (GUI) will appear.
+
+3. Enter your GitHub username, personal access token, and the file name where you want to save the follower data.
+
+4. Click the "Start Tracking" button to begin monitoring your followers. The application will display new followers, unfollowers, and followers who have followed you back in the GUI window.
+
+## Example
+Below is an example of the application's GUI in action:
 
 <img width="444" alt="image" src="https://github.com/user-attachments/assets/e9c5f7f0-8d9e-4acf-a673-d6335b8ad3f0">
- 
-# Contributing
-Contributions are always welcome! If you find a bug or want to add a new feature, feel free to submit a pull request. To get started, fork this repository and create a new branch for your changes. Make your changes and submit a pull request with a brief description of your changes.
 
-# License
+## Contributing
+Contributions are always welcome! If you find a bug or want to add a new feature, feel free to submit a pull request. To get started, fork this repository and create a new branch for your changes. Make your changes and submit a pull request with a brief description of your modifications.
+
+## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-# Acknowledgments
-Thanks to the Github API team for providing an easy-to-use API for fetching user data.
-Thanks to the requests library team for creating a great Python library for making HTTP requests.
+## Acknowledgments
+Thanks to the GitHub API team for providing an easy-to-use API for fetching user data.
+Thanks to the requests and tkinter teams for creating great Python libraries for making HTTP requests and building GUIs, respectively.
