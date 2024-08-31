@@ -1,4 +1,4 @@
-## github-follower-checker-pagination
+## github-follower-checker-UserInputForm
 ## MIT License
 ## Created Date: 2024-08-31
 ## Version 1.0
