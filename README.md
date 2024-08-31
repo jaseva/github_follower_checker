@@ -7,15 +7,19 @@ This is a Python script that allows you to check your Github followers, track wh
 To get started, you'll need to have Python 3 installed on your machine, along with the requests library. You'll also need a personal access token from Github to authenticate your requests to the API. Follow the instructions in the script to obtain a personal access token.
 
 # Usage
-To use the Github follower checker, clone this repository to your local machine and run the github_follower_checker_pagination.py script in the terminal. The script takes the following arguments:
+To use the Github follower checker, clone this repository to your local machine and run the github_follower_checker_pagination_tkinter.py script in the terminal. 
+
+The script takes the following arguments:
 
 username (required): The Github username to check for followers.
-token (required): Your personal access token from Github.
-output (optional): The name of the output file. By default, the output is written to a file named follower_changes.txt.
+<br>token (required): Your personal access token from Github.
+<br>output (optional): The name of the output file. By default, the output is written to a file named follower_changes.txt.
 
 Here's an example of how to run the script:
 
-`python github_follower_checker_pagination.py --username USERNAME --token YOUR_TOKEN --output FILENAME`
+`python github_follower_checker_pagination_tkinter.py --username USERNAME --token YOUR_TOKEN --output FILENAME`
+
+<img width="449" alt="image" src="https://github.com/user-attachments/assets/ef499dd2-809d-4a71-8e62-1e4b7a91fce3">
  
 # Contributing
 Contributions are always welcome! If you find a bug or want to add a new feature, feel free to submit a pull request. To get started, fork this repository and create a new branch for your changes. Make your changes and submit a pull request with a brief description of your changes.
