@@ -55,7 +55,7 @@ python github_follower_checker.py
 <div align="center">
 <img width="526" alt="image" src="https://github.com/user-attachments/assets/60f5c3c4-fa76-4237-81be-656f630799f6">
 
-<img width="745" alt="image" src="https://github.com/user-attachments/assets/b58d8488-995b-441c-9a11-3d8127d1078c">
+<img width="748" alt="image" src="https://github.com/user-attachments/assets/320bf3a8-d7fa-4cd9-8b35-3a4ac4db6b36">
 </div>
 
 ## User Interface
