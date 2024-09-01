@@ -19,6 +19,7 @@ To get started, you'll need:
   - `tkinter`
   - `matplotlib`
 - A **personal access token** from GitHub to authenticate your requests to the API.
+- An **API Key** from OpenAI to access GTP LLM models to summarize GitHub API requests.
 
 ### Installation
 
