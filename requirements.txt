@@ -1,0 +1,18 @@
+# requests
+# matplotlib
+# tkinter
+
+# ---------------------
+
+# requests
+# matplotlib
+# tkinter
+# openai
+
+# ---------------------
+
+requests
+matplotlib
+tkinter
+openai
+python-dotenv
