@@ -1,6 +1,11 @@
-# GitHub Follower Tracker
+# GitHub Follower Checker
 
 This app tracks your GitHub profile for who follows you, who follows you back, and who unfollows you. It now includes advanced analytics to visualize follower growth trends, track engagement metrics, and segment followers.
+
+## Features
+- Tracks followers and unfollowers.
+- Stores follower data in a database.
+- Provides analytics, including follower growth plots and segmentation.
 
 ## Getting Started
 
@@ -19,8 +24,8 @@ To get started, you'll need:
 
 1. **Clone the Repository**:
     ```sh
-    git clone https://github.com/yourusername/github-follower-tracker.git
-    cd github-follower-tracker
+    git clone https://github.com/yourusername/github_follower_checker.git
+    cd github_follower_checker
     ```
 
 2. **Install Dependencies**:
@@ -34,10 +39,14 @@ To get started, you'll need:
 
 ### Usage
 
-To use the GitHub Follower Tracker, run the `github_follower_tracker.py` script in the terminal or a Python IDE.
+To use the GitHub Follower Checker, run the `github_follower_checker.py` script in the terminal or a Python IDE.
+- Input your GitHub username, personal access token, and the desired file name to store followers.
+- Click **Start Tracking** to begin monitoring your followers.
+- Use **Show Analytics** to visualize follower growth.
+- Use **Segment Followers** to categorize followers by activity or other metrics.
 
 ```sh
-python github_follower_tracker.py
+python github_follower_checker.py
 ```
 <div align="center">
 <img width="447" alt="image" src="https://github.com/user-attachments/assets/eefc301f-d061-49a9-8a34-224629a69597">
@@ -62,11 +71,15 @@ The GitHub Follower Tracker now includes advanced analytics features:
 - **Engagement Metrics**: Although this feature is currently a placeholder, it will eventually track your interaction history with followers (e.g., comments, likes).
 - **Follower Segmentation**: Group followers based on criteria like activity level, date followed, or contribution to repositories.
 
+## Notes
+- Follower history is stored in a SQLite database (`followers.db`).
+- Date of following is approximated by when the tracking script is run.
+
 ### Example
 
 1. **Start Tracking**:
     ```sh
-    python github_follower_tracker.py
+    python github_follower_checker.py
     ```
 
 2. **View Follower Growth**:
@@ -77,7 +90,7 @@ The GitHub Follower Tracker now includes advanced analytics features:
 
 ### Project Structure
 
-- `github_follower_tracker.py`: The main script to run the application.
+- `github_follower_checker.py`: The main script to run the application.
 - `analytics.py`: Handles the advanced analytics, such as plotting follower growth and segmenting followers.
 - `utils.py`: Contains utility functions for fetching and formatting follower data.
 - `requirements.txt`: Lists the dependencies required to run the application.
