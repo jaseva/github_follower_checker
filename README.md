@@ -53,7 +53,7 @@ To use the GitHub Follower Checker, run the `github_follower_checker.py` script 
 python github_follower_checker.py
 ```
 <div align="center">
-<img width="447" alt="image" src="https://github.com/user-attachments/assets/eefc301f-d061-49a9-8a34-224629a69597">
+<img width="526" alt="image" src="https://github.com/user-attachments/assets/60f5c3c4-fa76-4237-81be-656f630799f6">
 
 <img width="745" alt="image" src="https://github.com/user-attachments/assets/b58d8488-995b-441c-9a11-3d8127d1078c">
 </div>
