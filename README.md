@@ -16,8 +16,11 @@ To get started, you'll need:
 - **Python 3** installed on your machine.
 - The following Python libraries:
   - `requests`
-  - `tkinter`
   - `matplotlib`
+  - `tkinter`
+  - `openai`
+  - `python-dotenv`
+  
 - A **personal access token** from GitHub to authenticate your requests to the API.
 - An **API Key** from OpenAI to access GTP LLM models to summarize GitHub API requests.
 
@@ -112,4 +115,4 @@ This project is licensed under the MIT License - see the `LICENSE.md` file for d
 ### Acknowledgments
 
 - Thanks to the GitHub API team for providing an easy-to-use API for fetching user data.
-- Thanks to the developers of the `requests` and `matplotlib` libraries for making HTTP requests and data visualization in Python straightforward.
+- Thanks to the developers of the `requests`, `matplotlib`, `tkinter`, `openai`, and `python-dotenv` libraries for making HTTP requests and data visualization in Python straightforward.
