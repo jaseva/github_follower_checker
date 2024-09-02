@@ -6,6 +6,7 @@ This app tracks your GitHub profile for who follows you, who follows you back, a
 - Tracks followers and unfollowers.
 - Stores follower data in a database.
 - Provides analytics, including follower growth plots and segmentation.
+- Generates AI Summaries of user profiles (OpenAI GPT Models).
 
 ## Getting Started
 
@@ -56,11 +57,18 @@ python github_follower_checker.py
 <img width="526" alt="image" src="https://github.com/user-attachments/assets/60f5c3c4-fa76-4237-81be-656f630799f6">
 
 <img width="748" alt="image" src="https://github.com/user-attachments/assets/320bf3a8-d7fa-4cd9-8b35-3a4ac4db6b36">
+
+<img width="602" alt="image" src="https://github.com/user-attachments/assets/578d5077-fed5-4126-8639-ab2a0db3dc24">
+
+<img width="865" alt="image" src="https://github.com/user-attachments/assets/3692f375-61c6-458d-8969-efaddbb504f3">
+
 </div>
+
+
 
 ## User Interface
 
-- **GitHub Username**: Enter the GitHub username you want to track.
+- **GitHub Username**: Enter the GitHub username you want to track or generate a summary (uses OpenAI GPT models).
 - **Personal Access Token**: Enter your GitHub personal access token.
 - **Followers File Name**: Specify the name of the file where follower data will be stored (e.g., `followers.json`).
 - **Start Tracking**: Click this button to begin tracking your followers.
