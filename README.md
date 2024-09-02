@@ -93,6 +93,7 @@ python github_follower_checker.py
 
 <img width="865" alt="image" src="https://github.com/user-attachments/assets/3692f375-61c6-458d-8969-efaddbb504f3">
 
+<img width="604" alt="image" src="https://github.com/user-attachments/assets/9f309d8d-964d-46ed-8d2f-846f8556ab6f">
 </div>
 
 ## User Interface
