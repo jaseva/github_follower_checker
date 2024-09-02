@@ -1,7 +1,7 @@
 ## utils.py
 ## MIT License
 ## Created Date: 2024-09-01
-## Version 1.0
+## Version 1.1
 
 import requests
 
