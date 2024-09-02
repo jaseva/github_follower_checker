@@ -90,7 +90,7 @@ To use the GitHub Follower Checker, run the `github_follower_checker.py` script 
 
 <img width="865" alt="image" src="https://github.com/user-attachments/assets/3692f375-61c6-458d-8969-efaddbb504f3">
 
-<img width="601" alt="image" src="https://github.com/user-attachments/assets/84b44518-b56c-4520-b56a-883309879d4c">
+<img width="601" alt="Screenshot2" src="https://github.com/user-attachments/assets/a3f589b9-4cf3-4529-ad34-385d0e3e8ba1">
 
 <img width="253" alt="image" src="https://github.com/user-attachments/assets/1d2b1917-e73e-4c73-b513-938e134eaef0">
 
