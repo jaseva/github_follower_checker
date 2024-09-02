@@ -67,7 +67,7 @@ python github_follower_checker.py
 
 ## User Interface
 
-- **GitHub Username**: Enter the GitHub username you want to track.
+- **GitHub Username**: Enter the GitHub username you want to track or generate a summary (uses OpenAI GPT models).
 - **Personal Access Token**: Enter your GitHub personal access token.
 - **Followers File Name**: Specify the name of the file where follower data will be stored (e.g., `followers.json`).
 - **Start Tracking**: Click this button to begin tracking your followers.
