@@ -50,7 +50,7 @@ To get started, you'll need:
 
    b. **OpenAI API Key**:
 
-      - Create an OpenAI API key by following these instructions: https://beta.openai.com/account/api-keys
+      - Create an OpenAI API key by following these instructions: https://platform.openai.com/account/api-keys
       - You'll need an OpenAI account for this.
       - Save your API key securely.
 
