@@ -261,7 +261,7 @@ from dotenv import load_dotenv
 # Load API key from .env file
 load_dotenv()
 
-
+# Function to track followers
 def track_followers(username, token, followers_file):
     try:
         conn = sqlite3.connect('follower_data.db')
@@ -319,7 +319,7 @@ def track_followers(username, token, followers_file):
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
-
+# Function to start tracking in a separate thread
 def start_tracking():
     username = username_entry.get().strip()
     token = token_entry.get().strip()
@@ -332,7 +332,7 @@ def start_tracking():
     threading.Thread(target=track_followers, args=(username, token, followers_file)).start()
     summary_button.config(state=tk.NORMAL)  # Enable button after tracking
 
-
+# Function to show analytics
 def show_analytics():
     try:
         conn = sqlite3.connect('follower_data.db')
@@ -341,7 +341,7 @@ def show_analytics():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
-
+# Function to segment followers
 def segment_followers_ui():
     username = username_entry.get().strip()
     token = token_entry.get().strip()
@@ -372,7 +372,7 @@ def segment_followers_ui():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
-
+# Function to generate AI summary 
 def generate_summary(username, token):
     try:
         # Initialize OpenAI API key
@@ -426,7 +426,7 @@ def generate_summary(username, token):
         messagebox.showerror("Error", str(e))
         return None
 
-
+# Function to wrap AI generated summary
 def generate_summary_wrapper():
     username = profile_entry.get().strip()
     token = token_entry.get().strip()
@@ -445,46 +445,67 @@ def generate_summary_wrapper():
 root = tk.Tk()
 root.title("GitHub Follower Checker")
 
+# Increase window size to accomodate all elements
+root.geometry("800x600")
+root.resizable(True, True)
+
+# Header
+header = tk.Label(root, text="GitHub Follower Checker", font=('Helvetica', 18, 'bold'), pady=10)
+header.pack()
+
+# Frame for input fields
+input_frame = tk.Frame(root, padx=10, pady=10)
+input_frame.pack()
+
+# Username input
 username_label = tk.Label(root, text="GitHub Username:")
 username_label.pack()
 username_entry = tk.Entry(root)
 username_entry.pack()
 
+# Token input
 token_label = tk.Label(root, text="GitHub Token:")
 token_label.pack()
 token_entry = tk.Entry(root, show="*")
 token_entry.pack()
 
+# Follower file name input
 followers_file_label = tk.Label(root, text="Followers File:")
 followers_file_label.pack()
 followers_file_entry = tk.Entry(root)
 followers_file_entry.pack()
 
+# Track Button
 track_button = tk.Button(root, text="Track Followers", command=start_tracking)
 track_button.pack()
 
+# Show Analytics Button
 show_analytics_button = tk.Button(root, text="Show Analytics", command=show_analytics, state=tk.DISABLED)
 show_analytics_button.pack()
 
+# Segment Followers Button
 segment_followers_button = tk.Button(root, text="Segment Followers", command=segment_followers_ui, state=tk.DISABLED)
 segment_followers_button.pack()
 
+# OptionMenu for segmentation
 segmentation_type_var = tk.StringVar(value="repo")
 segmentation_label = tk.Label(root, text="Segment By:")
 segmentation_label.pack()
 segmentation_menu = tk.OptionMenu(root, segmentation_type_var, "repo", "activity")
 segmentation_menu.pack()
 
+# GitHub Profile to summarize
 profile_label = tk.Label(root, text="Profile to Summarize:")
 profile_label.pack()
 profile_entry = tk.Entry(root)
 profile_entry.pack()
 
+# Generate Summary Button
 summary_button = tk.Button(root, text="Generate Summary", command=generate_summary_wrapper, state=tk.DISABLED)
 summary_button.pack()
 
 result_text = scrolledtext.ScrolledText(root, wrap=tk.WORD, state=tk.DISABLED)
 result_text.pack(expand=True, fill='both')
 
-root.geometry("800x600")
+# Start the GUI event loop
 root.mainloop()
