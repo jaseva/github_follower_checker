@@ -6,6 +6,7 @@ This app tracks your GitHub profile for who follows you, who follows you back, a
 - Tracks followers and unfollowers.
 - Stores follower data in a database.
 - Provides analytics, including follower growth plots and segmentation.
+- Generates AI Summaries of user profiles (OpenAI GPT Models).
 
 ## Getting Started
 
