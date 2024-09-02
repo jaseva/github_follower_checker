@@ -81,9 +81,6 @@ To use the GitHub Follower Checker, run the `github_follower_checker.py` script 
 - Use **Show Analytics** to visualize follower growth.
 - Use **Segment Followers** to categorize followers by activity or other metrics.
 
-```sh
-python github_follower_checker.py
-```
 <div align="center">
 <img width="526" alt="image" src="https://github.com/user-attachments/assets/60f5c3c4-fa76-4237-81be-656f630799f6">
 
