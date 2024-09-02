@@ -39,9 +39,39 @@ To get started, you'll need:
     pip install -r requirements.txt
     ```
 
-3. **Set Up Your GitHub Token**:
-   - Generate a personal access token from GitHub by following [these instructions](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
+3. **Set Up Your Credentials**:
+   - This step involves setting up two credentials:
 
+a. **GitHub Personal Access Token**:
+
+   - Generate a personal access token from GitHub by following [these instructions](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).   
+   - Make sure to grant the "repo" and "user" scopes to allow the application to access your follower data and profile information.
+   - Save your token securely. We recommend using a password manager or a dedicated secrets store.
+
+b. **OpenAI API Key**:
+
+   - Create an OpenAI API key by following these instructions: https://beta.openai.com/account/api-keys
+   - You'll need an OpenAI account for this.
+   - Save your API key securely.
+
+4. **Create a .env File**:
+
+   - Create a new file named .env in the root directory of your project (where the README.md file is located).
+   - This file is used to store sensitive information like API keys.
+   - Important: Do not commit the .env file to version control (e.g., Git). This prevents your API keys from being exposed publicly.
+   - Add the following line to your .env file, replacing <your_github_token> and <your_openai_api_key> with your actual credentials:
+   - GITHUB_TOKEN=<your_github_token>
+   - OPENAI_API_KEY=<your_openai_api_key>
+
+5. **Run the Application**:
+
+   - Once you've completed these steps, you can run the application using the following command:
+   ```sh
+   python github_follower_checker.py
+   ```
+
+   - This will start the Github Follower Tracker application with the necessary credentials.
+  
 ### Usage
 
 To use the GitHub Follower Checker, run the `github_follower_checker.py` script in the terminal or a Python IDE.
@@ -63,8 +93,6 @@ python github_follower_checker.py
 <img width="865" alt="image" src="https://github.com/user-attachments/assets/3692f375-61c6-458d-8969-efaddbb504f3">
 
 </div>
-
-
 
 ## User Interface
 
