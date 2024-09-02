@@ -1,35 +1,55 @@
+## analytics.py
+## MIT License
+## Created Date: 2024-09-01
+## Version 1.0
+
+import sqlite3
 import matplotlib.pyplot as plt
-import datetime
+from datetime import datetime
 
-def plot_follower_growth(follower_history):
-    dates = list(follower_history.keys())
-    follower_counts = list(follower_history.values())
+def create_table(conn):
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS followers (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            timestamp TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(dates, follower_counts, marker='o')
-    plt.title('Follower Growth Over Time')
-    plt.xlabel('Date')
-    plt.ylabel('Number of Followers')
-    plt.xticks(rotation=45)
-    plt.grid(True)
+def insert_follower(conn, username, timestamp):
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO followers (username, timestamp)
+        VALUES (?, ?)
+    ''', (username, timestamp))
+    conn.commit()
+
+def plot_follower_growth(conn):
+    cursor = conn.cursor()
+    cursor.execute("SELECT timestamp, COUNT(DISTINCT username) FROM followers GROUP BY timestamp ORDER BY timestamp")
+    data = cursor.fetchall()
+
+    timestamps = [datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S') for row in data]
+    counts = [row[1] for row in data]
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(timestamps, counts, marker='o')
+    plt.title("Follower Growth Over Time")
+    plt.xlabel("Time")
+    plt.ylabel("Number of Followers")
+    plt.gcf().autofmt_xdate()  # Rotate and align the tick labels
     plt.tight_layout()
     plt.show()
 
 def segment_followers(followers, segmentation_type):
+    segments = {}
     if segmentation_type == "activity":
-        # Example segmentation logic: create groups based on follower activity
-        return {"Active": [f for f in followers if is_active(f)],
-                "Inactive": [f for f in followers if not is_active(f)]}
-    elif segmentation_type == "date_followed":
-        # Example segmentation logic: create groups based on date followed
-        return {"Recent": [f for f in followers if followed_recently(f)],
-                "Old": [f for f in followers if not followed_recently(f)]}
-    # Add more segmentation types as needed
-
-def is_active(follower):
-    # Placeholder for activity check logic
-    return True  # or False based on real criteria
-
-def followed_recently(follower):
-    # Placeholder for date followed logic
-    return True  # or False based on real criteria
+        segments['active'] = [user for user in followers if len(user) >= 5]
+        segments['less_active'] = [user for user in followers if len(user) < 5]
+    elif segmentation_type == "repo":
+        # This is a placeholder. In a real scenario, you'd need to fetch repository data for each follower.
+        segments['repo_owners'] = followers[:len(followers)//2]
+        segments['contributors'] = followers[len(followers)//2:]
+    return segments

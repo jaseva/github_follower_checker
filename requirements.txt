@@ -1,0 +1,10 @@
+## requirements.txt
+## MIT License
+## Created Date: 2024-09-01
+## Version 1.0
+
+requests
+matplotlib
+tkinter
+openai
+python-dotenv
