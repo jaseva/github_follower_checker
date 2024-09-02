@@ -1,0 +1,7 @@
+
+.env
+/__pycache__
+/dev
+/python
+follower_data.db
+test.txt
