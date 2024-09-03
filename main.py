@@ -20,7 +20,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Function to check for the existence of the 'profile_summaries' table and creates it if it doesn't exist
-
 def create_summary_table(conn):
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS profile_summaries (
