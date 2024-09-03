@@ -68,29 +68,27 @@ To get started, you'll need:
    - Once you've completed these steps, you can run the application using the following command:
      
    ```sh
-   python github_follower_checker.py
+   python main.py
    ```
 
    - This will start the Github Follower Tracker application with the necessary credentials.
   
 ### Usage
 
-To use the GitHub Follower Checker, run the `github_follower_checker.py` script in the terminal or a Python IDE.
+To use the GitHub Follower Checker, run the `main.py` script in the terminal or a Python IDE.
 - Input your GitHub username, personal access token, and the desired file name to store followers.
 - Click **Start Tracking** to begin monitoring your followers.
 - Use **Show Analytics** to visualize follower growth.
 - Use **Segment Followers** to categorize followers by activity or other metrics.
 
 <div align="center">
-<img width="526" alt="Screenshot1" src="https://github.com/user-attachments/assets/6a9f4355-5413-4e05-bbe1-e1603d6741b6">
+<img width="751" alt="image" src="https://github.com/user-attachments/assets/04062820-44ec-4d44-9a73-ef6bbea96827">
+
+<img width="752" alt="image" src="https://github.com/user-attachments/assets/b7e45584-711d-451d-aca2-a938ff50d0a7">
 
 <img width="748" alt="image" src="https://github.com/user-attachments/assets/320bf3a8-d7fa-4cd9-8b35-3a4ac4db6b36">
 
-<img width="602" alt="image" src="https://github.com/user-attachments/assets/578d5077-fed5-4126-8639-ab2a0db3dc24">
-
 <img width="865" alt="image" src="https://github.com/user-attachments/assets/3692f375-61c6-458d-8969-efaddbb504f3">
-
-<img width="601" alt="Screenshot2" src="https://github.com/user-attachments/assets/a3f589b9-4cf3-4529-ad34-385d0e3e8ba1">
 
 <img width="253" alt="image" src="https://github.com/user-attachments/assets/1d2b1917-e73e-4c73-b513-938e134eaef0">
 
@@ -122,7 +120,7 @@ The GitHub Follower Tracker now includes advanced analytics features:
 
 1. **Start Tracking**:
     ```sh
-    python github_follower_checker.py
+    python main.py
     ```
 
 2. **View Follower Growth**:
@@ -133,7 +131,7 @@ The GitHub Follower Tracker now includes advanced analytics features:
 
 ### Project Structure
 
-- `github_follower_checker.py`: The main script to run the application.
+- `main.py`: The main script to run the application.
 - `analytics.py`: Handles the advanced analytics, such as plotting follower growth and segmenting followers.
 - `utils.py`: Contains utility functions for fetching and formatting follower data.
 - `requirements.txt`: Lists the dependencies required to run the application.
