@@ -1,10 +1,10 @@
-# ## github_follower_checker.py
-# ## MIT License
-# ## Created Date: 2024-09-01
-# ## Version 1.1
+# main.py
+# MIT License
+# Created Date: 2024-09-02
+# Version 1.1.1
 
 import tkinter as tk
-from tkinter import messagebox, scrolledtext
+from tkinter import messagebox, scrolledtext, ttk
 import threading
 import os
 import json
@@ -47,23 +47,23 @@ def track_followers(username, token, followers_file):
         for follower in current_followers:
             insert_follower(conn, follower, today)
 
-        result_text.config(state=tk.NORMAL)
-        result_text.delete(1.0, tk.END)
+        follower_text.config(state=tk.NORMAL)
+        follower_text.delete(1.0, tk.END)
 
         formatted_new, color_new = format_list("New followers", new_followers, "green")
-        result_text.insert(tk.END, formatted_new, "new_followers")
+        follower_text.insert(tk.END, formatted_new, "new_followers")
 
         formatted_unf, color_unf = format_list("Unfollowers", unfollowers, "red")
-        result_text.insert(tk.END, formatted_unf, "unfollowers")
+        follower_text.insert(tk.END, formatted_unf, "unfollowers")
 
         formatted_back, color_back = format_list("Followers who followed back", followers_back, "blue")
-        result_text.insert(tk.END, formatted_back, "followers_back")
+        follower_text.insert(tk.END, formatted_back, "followers_back")
 
-        result_text.tag_config("new_followers", foreground=color_new)
-        result_text.tag_config("unfollowers", foreground=color_unf)
-        result_text.tag_config("followers_back", foreground=color_back)
+        follower_text.tag_config("new_followers", foreground=color_new)
+        follower_text.tag_config("unfollowers", foreground=color_unf)
+        follower_text.tag_config("followers_back", foreground=color_back)
 
-        result_text.config(state=tk.DISABLED)
+        follower_text.config(state=tk.DISABLED)
 
         with open(followers_file, 'w') as f:
             json.dump({'followers': current_followers, 'history': follower_history}, f, indent=4)
@@ -76,6 +76,7 @@ def track_followers(username, token, followers_file):
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
+    switch_tab(notebook, 0)  # Switch to "Followers" tab after generating summary
 
 # Function to start tracking in a separate thread
 def start_tracking():
@@ -98,6 +99,7 @@ def show_analytics():
         conn.close()
     except Exception as e:
         messagebox.showerror("Error", str(e))
+    switch_tab(notebook, 0)  # Switch to "Followers" tab after generating summary
 
 # Function to segment followers
 def segment_followers_ui():
@@ -117,18 +119,19 @@ def segment_followers_ui():
 
         segments = segment_followers(followers, segmentation_type)
 
-        result_text.config(state=tk.NORMAL)
-        result_text.delete(1.0, tk.END)
+        follower_text.config(state=tk.NORMAL)
+        follower_text.delete(1.0, tk.END)
 
         for segment, members in segments.items():
             formatted_segment, color_segment = format_list(segment, members, "blue")
-            result_text.insert(tk.END, formatted_segment, "segment")
+            follower_text.insert(tk.END, formatted_segment, "segment")
 
-        result_text.tag_config("segment", foreground="blue")
-        result_text.config(state=tk.DISABLED)
+        follower_text.tag_config("segment", foreground="blue")
+        follower_text.config(state=tk.DISABLED)
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
+    switch_tab(notebook, 0)  # Switch to "Followers" tab after generating summary
 
 # Function to generate AI summary 
 def generate_summary(username, token):
@@ -161,7 +164,7 @@ def generate_summary(username, token):
         # Create prompt for OpenAI API
         prompt = (f"User {username} has the following bio: {profile_description}. "
                  f"They have contributed to the following repositories: {', '.join(repos_contributed_to)}. "
-                 "Summarize the user's profile and contributions.")
+                 "Summarize the user's profile and contributions. Identify the sentiment & tone of the individual.")
 
         # Make request to OpenAI chat completions
         completion = client.chat.completions.create(
@@ -177,7 +180,6 @@ def generate_summary(username, token):
 
         # Extract and return summary using object attributes
         summary = completion.choices[0].message.content.strip()
-        print(summary)  # For debugging
         return summary
 
     except Exception as e:
@@ -193,77 +195,135 @@ def generate_summary_wrapper():
         return
     summary = generate_summary(username, token)
     if summary:
-        result_text.config(state=tk.NORMAL)
-        result_text.delete(1.0, tk.END)
-        result_text.insert(tk.END, f"Summary: {summary}", "summary")
-        result_text.tag_config("summary", foreground="black")
-        result_text.config(state=tk.DISABLED)
+        summary_text.config(state=tk.NORMAL)
+        summary_text.delete(1.0, tk.END)
+        summary_text.insert(tk.END, f"Summary: {summary}", "summary")
+        summary_text.tag_config("summary", foreground="black")
+        summary_text.config(state=tk.DISABLED)
+        # Switch to the Profile Summary tab
+        # notebook.select(1)  # Index 1 refers to the "Profile Summary" tab
+        switch_tab(notebook, 1)  # Switch to "Profile Summary" tab after generating summary
+
+def switch_tab(notebook, index):
+     # Initialize selected_tab here
+    selected_tab = 0  # or any default value
+    
+    notebook.select(index)
+    style.configure("TNotebook.Tab{}".format(index), background="blue", foreground="white")
+    style.configure("TNotebook.Tab{}".format(selected_tab), background="gray", foreground="black")
+    selected_tab = index
 
 # GUI setup
 root = tk.Tk()
 root.title("GitHub Follower Checker")
 
-# Increase window size to accomodate all elements
-root.geometry("800x600")
+# Initialize selected tab
+selected_tab = 0
+
+# Configure notebook style
+style = ttk.Style()
+style.theme_use("default")
+style.configure("TNotebook.Tab", background="gray", foreground="black")
+
+# Add notebook to root
+notebook = ttk.Notebook(root)
+notebook.pack(expand=True, fill='both')
+
+# Increase window size to accommodate all elements
+root.geometry("1000x800")
 root.resizable(True, True)
 
 # Header
 header = tk.Label(root, text="GitHub Follower Checker", font=('Helvetica', 18, 'bold'), pady=10)
 header.pack()
 
-# Frame for input fields
-input_frame = tk.Frame(root, padx=10, pady=10)
-input_frame.pack()
+# Frame for input fields with columns
+input_frame = tk.Frame(root, padx=20, pady=10)
+input_frame.pack(fill=tk.X)
+
+# Left column for follower-related controls
+left_column = tk.Frame(input_frame)
+left_column.grid(row=0, column=0, padx=(0, 20), pady=10, sticky="n")
+
+# Right column for profile summary-related controls
+right_column = tk.Frame(input_frame)
+right_column.grid(row=0, column=1, pady=10, sticky="n")
+
+# Tabs for different outputs
+notebook = ttk.Notebook(root)
+notebook.pack(expand=True, fill='both')
+
+# Tab for follower data
+follower_tab = ttk.Frame(notebook)
+notebook.add(follower_tab, text="Followers")
+
+# Tab for summary data
+summary_tab = ttk.Frame(notebook)
+notebook.add(summary_tab, text="Profile Summary")
 
 # Username input
-username_label = tk.Label(root, text="GitHub Username:")
-username_label.pack()
-username_entry = tk.Entry(root)
-username_entry.pack()
+username_label = tk.Label(left_column, text="GitHub Username:")
+username_label.pack(anchor="w")
+username_entry = tk.Entry(left_column)
+username_entry.pack(anchor="w")
 
 # Token input
-token_label = tk.Label(root, text="GitHub Token:")
-token_label.pack()
-token_entry = tk.Entry(root, show="*")
-token_entry.pack()
+token_label = tk.Label(left_column, text="GitHub Token:")
+token_label.pack(anchor="w")
+token_entry = tk.Entry(left_column, show="*")
+token_entry.pack(anchor="w")
 
 # Follower file name input
-followers_file_label = tk.Label(root, text="Followers File:")
-followers_file_label.pack()
-followers_file_entry = tk.Entry(root)
-followers_file_entry.pack()
+followers_file_label = tk.Label(left_column, text="Followers File:")
+followers_file_label.pack(anchor="w")
+followers_file_entry = tk.Entry(left_column)
+followers_file_entry.pack(anchor="w")
 
-# Track Button
-track_button = tk.Button(root, text="Track Followers", command=start_tracking)
-track_button.pack()
+# Profile entry input (right column)
+profile_label = tk.Label(right_column, text="Enter GitHub Profile:")
+profile_label.pack(anchor="w")
+profile_entry = tk.Entry(right_column)
+profile_entry.pack(anchor="w")
 
-# Show Analytics Button
-show_analytics_button = tk.Button(root, text="Show Analytics", command=show_analytics, state=tk.DISABLED)
-show_analytics_button.pack()
+# Tracking button
+track_button = tk.Button(left_column, text="Track Followers", command=start_tracking)
+track_button.pack(anchor="w", pady=5)
 
-# Segment Followers Button
-segment_followers_button = tk.Button(root, text="Segment Followers", command=segment_followers_ui, state=tk.DISABLED)
-segment_followers_button.pack()
+# Show analytics button
+show_analytics_button = tk.Button(left_column, text="Show Analytics", command=show_analytics, state=tk.DISABLED)
+show_analytics_button.pack(anchor="w", pady=5)
 
-# OptionMenu for segmentation
-segmentation_type_var = tk.StringVar(value="repo")
-segmentation_label = tk.Label(root, text="Segment By:")
-segmentation_label.pack()
-segmentation_menu = tk.OptionMenu(root, segmentation_type_var, "repo", "activity")
-segmentation_menu.pack()
+# Create the segmentation type variable with a default read-only label "Please Select"
+segmentation_type_var = tk.StringVar(value="Please Select")
 
-# GitHub Profile to summarize
-profile_label = tk.Label(root, text="Profile to Summarize:")
-profile_label.pack()
-profile_entry = tk.Entry(root)
-profile_entry.pack()
+# Label for Segmentation
+segmentation_label = tk.Label(left_column, text="Segment By:")
+segmentation_label.pack(anchor="w", pady=5)
 
-# Generate Summary Button
-summary_button = tk.Button(root, text="Generate Summary", command=generate_summary_wrapper, state=tk.DISABLED)
-summary_button.pack()
+# Dropdown menu for Segmentation Types
+segmentation_menu = tk.OptionMenu(left_column, segmentation_type_var, "repo", "activity")
+segmentation_menu.pack(anchor="w", pady=5)
 
-result_text = scrolledtext.ScrolledText(root, wrap=tk.WORD, state=tk.DISABLED)
-result_text.pack(expand=True, fill='both')
+# Segment followers button
+segment_followers_button = tk.Button(left_column, text="Segment Followers", command=segment_followers_ui, state=tk.DISABLED)
+segment_followers_button.pack(anchor="w", pady=5)
 
-# Start the GUI event loop
+# Profile summary button
+# summary_button = tk.Button(root, text="Generate Summary", command=lambda: generate_summary_wrapper(notebook), state=tk.DISABLED)
+# summary_button = tk.Button(right_column, text="Generate Summary", command=generate_summary_wrapper, state=tk.DISABLED)
+# summary_button = tk.Button(right_column, text="Generate Summary", command=lambda: generate_summary_wrapper(), state=tk.DISABLED)
+summary_button = tk.Button(right_column, text="Generate Summary", command=generate_summary_wrapper, state=tk.DISABLED)
+summary_button.pack(anchor="w", pady=5)
+
+# Follower display
+follower_text = scrolledtext.ScrolledText(follower_tab, height=20, state=tk.DISABLED, wrap=tk.WORD)
+follower_text.pack(fill=tk.BOTH, padx=20, pady=10, expand=True)
+
+# Summary display
+summary_text = scrolledtext.ScrolledText(summary_tab, height=20, state=tk.DISABLED, wrap=tk.WORD)
+summary_text.pack(fill=tk.BOTH, padx=20, pady=10, expand=True)
+
+# Switch to the "Followers" tab initially
+switch_tab(notebook, 0)
+
 root.mainloop()
