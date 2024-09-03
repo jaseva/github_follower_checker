@@ -1,7 +1,7 @@
 # main.py
 # MIT License
 # Created Date: 2024-09-02
-# Version 1.1.1
+# Version 1.1.1.1
 
 import tkinter as tk
 from tkinter import messagebox, scrolledtext, ttk
@@ -18,6 +18,20 @@ from dotenv import load_dotenv
 
 # Load API key from .env file
 load_dotenv()
+
+# Function to check for the existence of the 'profile_summaries' table and creates it if it doesn't exist
+
+def create_summary_table(conn):
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS profile_summaries (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        username TEXT NOT NULL,
+                        profile_description TEXT,
+                        repos_contributed_to TEXT,
+                        summary TEXT,
+                        date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )''')
+    conn.commit()
 
 # Function to track followers
 def track_followers(username, token, followers_file):
@@ -149,7 +163,7 @@ def generate_summary(username, token):
         # Fetch GitHub profile and repos data
         profile_response = requests.get(profile_url, headers=headers)
         repos_response = requests.get(repos_url, headers=headers)
-
+        
         # Check for successful API response
         profile_response.raise_for_status()
         repos_response.raise_for_status()
@@ -180,7 +194,7 @@ def generate_summary(username, token):
 
         # Extract and return summary using object attributes
         summary = completion.choices[0].message.content.strip()
-        return summary
+        return summary, profile_description, repos_contributed_to
 
     except Exception as e:
         messagebox.showerror("Error", str(e))
@@ -193,13 +207,32 @@ def generate_summary_wrapper():
     if not username or not token:
         messagebox.showwarning("Input Error", "Please enter username and token.")
         return
-    summary = generate_summary(username, token)
+    summary, profile_description, repos_contributed_to = generate_summary(username, token)
+
     if summary:
+        
+        # Store the summary in the database
+        try:
+            conn = sqlite3.connect('follower_data.db')
+            create_summary_table(conn)  # Ensure the table is created
+            cursor = conn.cursor()
+
+            # Insert the summary into the database
+            cursor.execute('''INSERT INTO profile_summaries (username, profile_description, repos_contributed_to, summary)
+                              VALUES (?, ?, ?, ?)''',
+                           (username, profile_description, ", ".join(repos_contributed_to), summary))
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+
+        # Display the summary in the UI 
         summary_text.config(state=tk.NORMAL)
         summary_text.delete(1.0, tk.END)
         summary_text.insert(tk.END, f"Summary: {summary}", "summary")
         summary_text.tag_config("summary", foreground="black")
         summary_text.config(state=tk.DISABLED)
+        
         # Switch to the Profile Summary tab
         # notebook.select(1)  # Index 1 refers to the "Profile Summary" tab
         switch_tab(notebook, 1)  # Switch to "Profile Summary" tab after generating summary
