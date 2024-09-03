@@ -82,7 +82,7 @@ To use the GitHub Follower Checker, run the `main.py` script in the terminal or 
 - Use **Segment Followers** to categorize followers by activity or other metrics.
 
 <div align="center">
-<img width="749" alt="image" src="https://github.com/user-attachments/assets/5f5b4a16-9c54-4852-a5b3-ece56637598d">
+<img width="751" alt="image" src="https://github.com/user-attachments/assets/04062820-44ec-4d44-9a73-ef6bbea96827">
 
 <img width="752" alt="image" src="https://github.com/user-attachments/assets/b7e45584-711d-451d-aca2-a938ff50d0a7">
 
