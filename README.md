@@ -68,14 +68,14 @@ To get started, you'll need:
    - Once you've completed these steps, you can run the application using the following command:
      
    ```sh
-   python github_follower_checker.py
+   python main.py
    ```
 
    - This will start the Github Follower Tracker application with the necessary credentials.
   
 ### Usage
 
-To use the GitHub Follower Checker, run the `github_follower_checker.py` script in the terminal or a Python IDE.
+To use the GitHub Follower Checker, run the `main.py` script in the terminal or a Python IDE.
 - Input your GitHub username, personal access token, and the desired file name to store followers.
 - Click **Start Tracking** to begin monitoring your followers.
 - Use **Show Analytics** to visualize follower growth.
@@ -122,7 +122,7 @@ The GitHub Follower Tracker now includes advanced analytics features:
 
 1. **Start Tracking**:
     ```sh
-    python github_follower_checker.py
+    python main.py
     ```
 
 2. **View Follower Growth**:
@@ -133,7 +133,7 @@ The GitHub Follower Tracker now includes advanced analytics features:
 
 ### Project Structure
 
-- `github_follower_checker.py`: The main script to run the application.
+- `main.py`: The main script to run the application.
 - `analytics.py`: Handles the advanced analytics, such as plotting follower growth and segmenting followers.
 - `utils.py`: Contains utility functions for fetching and formatting follower data.
 - `requirements.txt`: Lists the dependencies required to run the application.
