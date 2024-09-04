@@ -1,10 +1,11 @@
 # main.py
 # MIT License
 # Created Date: 2024-09-02
+# Created By: Jason Evans
 # Version 1.1.1.1
 
 import tkinter as tk
-from tkinter import messagebox, scrolledtext, ttk
+from tkinter import messagebox, scrolledtext, ttk, Menu
 import threading
 import os
 import json
@@ -19,7 +20,8 @@ from dotenv import load_dotenv
 # Load API key from .env file
 load_dotenv()
 
-# Function to check for the existence of the 'profile_summaries' table and creates it if it doesn't exist
+# Function to check for the existence of the 'profile_summaries' table and creates it if it doesn't exist 
+# Stores the generated summaries
 def create_summary_table(conn):
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS profile_summaries (
@@ -245,6 +247,28 @@ def switch_tab(notebook, index):
     style.configure("TNotebook.Tab{}".format(selected_tab), background="gray", foreground="black")
     selected_tab = index
 
+def set_theme(theme):
+    if theme == "light":
+        root.configure(bg="white")
+        style.configure('TLabel', background="white", foreground="black")
+        follower_text.configure(bg="white", fg="black")
+    elif theme == "dark":
+        root.configure(bg="black")
+        style.configure('TLabel', background="black", foreground="white")
+        follower_text.configure(bg="black", fg="white")
+    elif theme == "solarized_light":
+        root.configure(bg="#FDF6E3")
+        style.configure('TLabel', background="#FDF6E3", foreground="#657B83")
+        follower_text.configure(bg="#FDF6E3", fg="#657B83")
+    elif theme == "custom":
+        root.configure(bg="#2E3440")  # replace with your custom color
+        style.configure('TLabel', background="#2E3440", foreground="#2E3440")  # replace with your custom color
+        follower_text.configure(bg="#2E3440", fg="#2E3440")
+    else:
+        root.configure(bg="default_color_bg")
+        style.configure('TLabel', background="default_color_bg", foreground="default_color_fg")
+        follower_text.configure(bg="default_color_bg", fg="default_color_fg")
+
 # GUI setup
 root = tk.Tk()
 root.title("GitHub Follower Checker")
@@ -341,9 +365,6 @@ segment_followers_button = tk.Button(left_column, text="Segment Followers", comm
 segment_followers_button.pack(anchor="w", pady=5)
 
 # Profile summary button
-# summary_button = tk.Button(root, text="Generate Summary", command=lambda: generate_summary_wrapper(notebook), state=tk.DISABLED)
-# summary_button = tk.Button(right_column, text="Generate Summary", command=generate_summary_wrapper, state=tk.DISABLED)
-# summary_button = tk.Button(right_column, text="Generate Summary", command=lambda: generate_summary_wrapper(), state=tk.DISABLED)
 summary_button = tk.Button(right_column, text="Generate Summary", command=generate_summary_wrapper, state=tk.DISABLED)
 summary_button.pack(anchor="w", pady=5)
 
@@ -357,5 +378,22 @@ summary_text.pack(fill=tk.BOTH, padx=20, pady=10, expand=True)
 
 # Switch to the "Followers" tab initially
 switch_tab(notebook, 0)
+
+# Menu Bar for Theme Selection
+menu_bar = Menu(root)
+root.config(menu=menu_bar)
+
+file_menu = Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="File", menu=file_menu)
+file_menu.add_command(label="Exit", command=root.quit)
+
+# Theme Menu
+theme_menu = Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="Settings", menu=theme_menu)
+
+theme_menu.add_command(label="Light Theme", command=lambda: set_theme("light"))
+theme_menu.add_command(label="Dark Theme", command=lambda: set_theme("dark"))
+theme_menu.add_command(label="Solarized Light Theme", command=lambda: set_theme("solarized_light"))
+theme_menu.add_command(label="Custom Theme", command=lambda: set_theme("custom"))
 
 root.mainloop()
