@@ -93,6 +93,83 @@ def track_followers(username, token, followers_file):
         messagebox.showerror("Error", str(e))
     switch_tab(notebook, 0)  # Switch to "Followers" tab after generating summary
 
+# Helper function to get all users you are following
+def get_all_following(username, token):
+    following_url = f'https://api.github.com/users/{username}/following'
+    return get_all_followers(username, token, following_url)  # Reuse get_all_followers for simplicity
+
+# Function to track followers and who you follow that don't follow you back
+def track_followers(username, token, followers_file):
+    try:
+        conn = sqlite3.connect('follower_data.db')
+        create_table(conn)
+
+        if os.path.exists(followers_file):
+            with open(followers_file, 'r') as f:
+                follower_data = json.load(f)
+                previous_followers = follower_data.get('followers', [])
+                follower_history = follower_data.get('history', {})
+        else:
+            previous_followers = []
+            follower_history = {}
+
+        # Fetch current followers and following lists
+        followers_url = f'https://api.github.com/users/{username}/followers'
+        current_followers = get_all_followers(username, token, followers_url)
+
+        following_list = get_all_following(username, token)  # Fetch users you are following
+
+        new_followers = list(set(current_followers) - set(previous_followers))
+        unfollowers = list(set(previous_followers) - set(current_followers))
+        followers_back = list(set(previous_followers) & set(current_followers))
+
+        # Find users you are following who don't follow you back
+        not_following_back = list(set(following_list) - set(current_followers))
+
+        today = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        follower_history[today] = len(current_followers)
+
+        for follower in current_followers:
+            insert_follower(conn, follower, today)
+
+        # Display follower data in the text box
+        follower_text.config(state=tk.NORMAL)
+        follower_text.delete(1.0, tk.END)
+
+        formatted_new, color_new = format_list("New followers", new_followers, "green")
+        follower_text.insert(tk.END, formatted_new, "new_followers")
+
+        formatted_unf, color_unf = format_list("Unfollowers", unfollowers, "red")
+        follower_text.insert(tk.END, formatted_unf, "unfollowers")
+
+        formatted_back, color_back = format_list("Followers who followed back", followers_back, "blue")
+        follower_text.insert(tk.END, formatted_back, "followers_back")
+
+        # Add a section to display users not following you back
+        formatted_not_following_back, color_not_following_back = format_list("Not following you back", not_following_back, "purple")
+        follower_text.insert(tk.END, formatted_not_following_back, "not_following_back")
+
+        follower_text.tag_config("new_followers", foreground=color_new)
+        follower_text.tag_config("unfollowers", foreground=color_unf)
+        follower_text.tag_config("followers_back", foreground=color_back)
+        follower_text.tag_config("not_following_back", foreground=color_not_following_back)
+
+        follower_text.config(state=tk.DISABLED)
+
+        # Save updated data to file
+        with open(followers_file, 'w') as f:
+            json.dump({'followers': current_followers, 'history': follower_history}, f, indent=4)
+
+        show_analytics_button.config(state=tk.NORMAL)
+        segment_followers_button.config(state=tk.NORMAL)
+        summary_button.config(state=tk.NORMAL)
+
+        conn.close()
+
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+    switch_tab(notebook, 0)  # Switch to "Followers" tab after generating summary
+
 # Function to start tracking in a separate thread
 def start_tracking():
     username = username_entry.get().strip()
