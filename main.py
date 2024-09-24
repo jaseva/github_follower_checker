@@ -2,7 +2,9 @@
 # MIT License
 # Created Date: 2024-09-02
 # Created By: Jason Evans
-# Version 1.1.1.1
+# Modified Date: 2024-09-24
+# Modified By: Jason Evans
+# Version 1.2.1
 
 import tkinter as tk
 from tkinter import messagebox, scrolledtext, ttk, Menu
