@@ -86,7 +86,7 @@ To use the GitHub Follower Checker, run the `main.py` script in the terminal or 
 
 <img width="752" alt="image" src="https://github.com/user-attachments/assets/b7e45584-711d-451d-aca2-a938ff50d0a7">
 
-<img width="748" alt="image" src="https://github.com/user-attachments/assets/320bf3a8-d7fa-4cd9-8b35-3a4ac4db6b36">
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/3ed3c12b-90a5-4eba-ac9b-ea41c64214dd">
 
 <img width="865" alt="image" src="https://github.com/user-attachments/assets/3692f375-61c6-458d-8969-efaddbb504f3">
 
