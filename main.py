@@ -4,7 +4,7 @@
 # Created By: Jason Evans
 # Modified Date: 2024-10-18
 # Modified By: Jason Evans
-# Version 1.2.3
+# Version 1.2.4
 
 import tkinter as tk
 from tkinter import ttk, scrolledtext, Menu, messagebox
@@ -20,6 +20,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import sys
 import logging
+from datetime import datetime
 
 # Set up logger for debugging and error tracking
 logging.basicConfig(level=logging.INFO)
@@ -46,65 +47,6 @@ def create_summary_table(conn):
                     )''')
     conn.commit()
 
-# Function to track followers
-def track_followers(username, token, followers_file):
-    try:
-        conn = sqlite3.connect('follower_data.db')
-        create_table(conn)
-
-        if os.path.exists(followers_file):
-            with open(followers_file, 'r') as f:
-                follower_data = json.load(f)
-                previous_followers = follower_data.get('followers', [])
-                follower_history = follower_data.get('history', {})
-        else:
-            previous_followers = []
-            follower_history = {}
-
-        followers_url = f'https://api.github.com/users/{username}/followers'
-        current_followers = get_all_followers(username, token, followers_url)
-
-        new_followers = list(set(current_followers) - set(previous_followers))
-        unfollowers = list(set(previous_followers) - set(current_followers))
-        followers_back = list(set(previous_followers) & set(current_followers))  
-
-        today = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        follower_history[today] = len(current_followers)
-
-        for follower in current_followers:
-            insert_follower(conn, follower, today)
-
-        follower_text.config(state=tk.NORMAL)
-        follower_text.delete(1.0, tk.END)
-
-        formatted_new, color_new = format_list("New followers", new_followers, "green")
-        follower_text.insert(tk.END, formatted_new, "new_followers")
-
-        formatted_unf, color_unf = format_list("Unfollowers", unfollowers, "red")
-        follower_text.insert(tk.END, formatted_unf, "unfollowers")
-
-        formatted_back, color_back = format_list("Followers who followed back", followers_back, "blue")
-        follower_text.insert(tk.END, formatted_back, "followers_back")
-
-        follower_text.tag_config("new_followers", foreground=color_new)
-        follower_text.tag_config("unfollowers", foreground=color_unf)
-        follower_text.tag_config("followers_back", foreground=color_back)
-
-        follower_text.config(state=tk.DISABLED)
-
-        with open(followers_file, 'w') as f:
-            json.dump({'followers': current_followers, 'history': follower_history}, f, indent=4)
-
-        show_analytics_button.config(state=tk.NORMAL)
-        segment_followers_button.config(state=tk.NORMAL)
-        summary_button.config(state=tk.NORMAL)
-
-        conn.close()
-
-    except Exception as e:
-        messagebox.showerror("Error", str(e))
-    switch_tab(notebook, 0)  # Switch to "Followers" tab after generating summary
-
 # Helper function to get all users you are following
 def get_all_following(username, token):
     following_url = f'https://api.github.com/users/{username}/following'
@@ -113,9 +55,11 @@ def get_all_following(username, token):
 # Function to track followers and who you follow that don't follow you back
 def track_followers(username, token, followers_file):
     try:
+        # Step 1: Establish connection to database
         conn = sqlite3.connect('follower_data.db')
         create_table(conn)
 
+        # Step 2: Load previous follower data if exists
         if os.path.exists(followers_file):
             with open(followers_file, 'r') as f:
                 follower_data = json.load(f)
@@ -125,12 +69,14 @@ def track_followers(username, token, followers_file):
             previous_followers = []
             follower_history = {}
 
+        # Step 3: Get current followers from GitHub API
         # Fetch current followers and following lists
         followers_url = f'https://api.github.com/users/{username}/followers'
         current_followers = get_all_followers(username, token, followers_url)
 
         following_list = get_all_following(username, token)  # Fetch users you are following
 
+        # Step 4: Compute new followers, unfollowers, and followers who followed back
         new_followers = list(set(current_followers) - set(previous_followers))
         unfollowers = list(set(previous_followers) - set(current_followers))
         followers_back = list(set(previous_followers) & set(current_followers))
@@ -138,15 +84,23 @@ def track_followers(username, token, followers_file):
         # Find users you are following who don't follow you back
         not_following_back = list(set(following_list) - set(current_followers))
 
+        # Step 5: Capture current date and time
         today = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         follower_history[today] = len(current_followers)
 
+        # Step 6: Insert current followers into database
         for follower in current_followers:
             insert_follower(conn, follower, today)
 
+        # Step 7: Update output window (with timestamp)
         # Display follower data in the text box
         follower_text.config(state=tk.NORMAL)
         follower_text.delete(1.0, tk.END)
+
+        # Add the datetime stamp at the top
+        timestamp_output = f"Followers tracked on: {today}\n\n"
+        print(f"Inserting timestamp: {timestamp_output}")  # Debugging: Print timestamp to console/log
+        follower_text.insert(tk.END, timestamp_output)  # Insert timestamp at the top
 
         formatted_new, color_new = format_list("New followers", new_followers, "green")
         follower_text.insert(tk.END, formatted_new, "new_followers")
@@ -168,6 +122,7 @@ def track_followers(username, token, followers_file):
         
         follower_text.config(state=tk.DISABLED)
 
+        # Step 8: Save current followers to the file
         # Save updated data to file
         with open(followers_file, 'w') as f:
             json.dump({'followers': current_followers, 'history': follower_history}, f, indent=4)
