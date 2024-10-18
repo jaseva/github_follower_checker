@@ -2,12 +2,12 @@
 # MIT License
 # Created Date: 2024-09-02
 # Created By: Jason Evans
-# Modified Date: 2024-09-24
+# Modified Date: 2024-09-26
 # Modified By: Jason Evans
-# Version 1.2.1
+# Version 1.2.2
 
 import tkinter as tk
-from tkinter import messagebox, scrolledtext, ttk, Menu
+from tkinter import ttk, scrolledtext, Menu, messagebox
 import threading
 import os
 import json
@@ -18,6 +18,16 @@ from analytics import create_table, insert_follower, plot_follower_growth, segme
 from dev.prototype.utils import get_all_followers, format_list
 from openai import OpenAI
 from dotenv import load_dotenv
+import sys
+import logging
+
+# Set up logger for debugging and error tracking
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+handler = logging.StreamHandler(sys.stdout)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 # Load API key from .env file
 load_dotenv()
@@ -144,18 +154,18 @@ def track_followers(username, token, followers_file):
         formatted_unf, color_unf = format_list("Unfollowers", unfollowers, "red")
         follower_text.insert(tk.END, formatted_unf, "unfollowers")
 
-        formatted_back, color_back = format_list("Followers who followed back", followers_back, "blue")
-        follower_text.insert(tk.END, formatted_back, "followers_back")
-
         # Add a section to display users not following you back
         formatted_not_following_back, color_not_following_back = format_list("Not following you back", not_following_back, "purple")
         follower_text.insert(tk.END, formatted_not_following_back, "not_following_back")
 
+        formatted_back, color_back = format_list("Followers who followed back", followers_back, "blue")
+        follower_text.insert(tk.END, formatted_back, "followers_back")
+
         follower_text.tag_config("new_followers", foreground=color_new)
         follower_text.tag_config("unfollowers", foreground=color_unf)
-        follower_text.tag_config("followers_back", foreground=color_back)
         follower_text.tag_config("not_following_back", foreground=color_not_following_back)
-
+        follower_text.tag_config("followers_back", foreground=color_back)
+        
         follower_text.config(state=tk.DISABLED)
 
         # Save updated data to file
