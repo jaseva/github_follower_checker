@@ -4,7 +4,7 @@
 # Created By: Jason Evans
 # Modified Date: 2024-10-18
 # Modified By: Jason Evans
-# Version 1.2.4
+# Version 1.2.5
 
 import tkinter as tk
 from tkinter import ttk, scrolledtext, Menu, messagebox
@@ -21,6 +21,7 @@ from dotenv import load_dotenv
 import sys
 import logging
 from datetime import datetime
+import webbrowser
 
 # Set up logger for debugging and error tracking
 logging.basicConfig(level=logging.INFO)
@@ -51,6 +52,11 @@ def create_summary_table(conn):
 def get_all_following(username, token):
     following_url = f'https://api.github.com/users/{username}/following'
     return get_all_followers(username, token, following_url)  # Reuse get_all_followers for simplicity
+
+# Function to open PayPal donation link
+def open_donation_link():
+    donation_url = "https://www.paypal.com/donate/?hosted_button_id=AQCPKNSDGMJLL"
+    webbrowser.open(donation_url)
 
 # Function to track followers and who you follow that don't follow you back
 def track_followers(username, token, followers_file):
@@ -411,6 +417,10 @@ segment_followers_button.pack(anchor="w", pady=5)
 # Profile summary button
 summary_button = tk.Button(right_column, text="Generate Summary", command=generate_summary_wrapper, state=tk.DISABLED)
 summary_button.pack(anchor="w", pady=5)
+
+# Adding the "Donate Now" button
+donate_button = tk.Button(root, text="Donate Now", command=open_donation_link, bg="blue", fg="white", font=("Arial", 12, "bold"))
+donate_button.pack(pady=10)  # Adjust padding as needed
 
 # Follower display
 follower_text = scrolledtext.ScrolledText(follower_tab, height=20, state=tk.DISABLED, wrap=tk.WORD)
