@@ -156,3 +156,5 @@ This project is licensed under the MIT License - see the `LICENSE.md` file for d
 - Thanks to the GitHub API team for providing an easy-to-use API for fetching user data.
 - Thanks to the developers of the `requests`, `matplotlib`, `tkinter`, `openai`, and `python-dotenv` libraries for making HTTP requests and data visualization in Python straightforward.
 
+  [Donate](https://www.paypal.com/donate/?hosted_button_id=AQCPKNSDGMJLL) to support this project if you found it useful!
+
